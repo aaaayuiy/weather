@@ -42,7 +42,8 @@ export default class SearchInput extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({ container: {
+const styles = StyleSheet.create({
+  container: {
     height: 40,
     width: 300,
     marginTop: 20,
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({ container: {
     borderRadius: 5,
   },
   textInput: {
-flex: 1,
+    flex: 1,
     color: 'white',
   },
 });

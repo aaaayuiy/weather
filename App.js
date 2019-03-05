@@ -26,7 +26,7 @@ export default class App extends React.Component {
         behavior="padding">
 
         <ImageBackground
-          source={getImageForWeather('Clear')}
+          source={getImageForWeather('Light Cloud')}
           style={styles.imageContainer}
           imageStyle={styles.image}>
 
@@ -54,13 +54,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  red: {
-    color: 'red',
-  },
   textStyle: {
     textAlign: 'center',
-    fontFamily:
-      Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
+  ...Platform.select({
+    ios: {
+      fontFamily: 'AvenirNext-Regular',
+    },
+    android: {
+      fontFamily: 'Roboto',
+    },
+  }),
     color: 'white',
   },
   largeText: {
@@ -93,5 +96,6 @@ const styles = StyleSheet.create({
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.2)',
   paddingHorizontal: 20,
+  alignItems: 'center',
   },
 });
