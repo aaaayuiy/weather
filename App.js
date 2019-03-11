@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, TextInput, KeyboardAvoidingView, ImageBackground } from 'react-native';
+import { StyleSheet,
+  Text,
+  View,
+  Platform,
+  TextInput,
+  KeyboardAvoidingView,
+  ImageBackground } from 'react-native';
 import SearchInput from './components/SearchInput';
 import getImageForWeather from './utils/getImageForWeather';
 
