@@ -1,12 +1,25 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
+import PropTypes from 'prop-types';
 export default class SearchInput extends React.Component {
-  constructor(props) {
+  /**constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
-  }
+  }**/
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    placeholder:PropTypes.string,
+  };
+
+  static defaultProps = {
+  placeholder: '',
+  };
+
+  state = {
+    text: '',
+  };
 
   handleChangeText = text => {
       // We need to do something with newLocation
