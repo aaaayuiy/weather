@@ -10,11 +10,11 @@ export default class SearchInput extends React.Component {
   }**/
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    placeholder:PropTypes.string,
+    placeholder: PropTypes.string,
   };
 
   static defaultProps = {
-  placeholder: '',
+    placeholder: '',
   };
 
   state = {

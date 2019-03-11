@@ -15,7 +15,7 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-  this.handleUpdateLocation('San Francisco');
+    this.handleUpdateLocation('San Francisco');
   }
 
   handleUpdateLocation = city => {
