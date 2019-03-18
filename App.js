@@ -10,12 +10,6 @@ import SearchInput from './components/SearchInput';
 import getImageForWeather from './utils/getImageForWeather';
 
 export default class App extends React.Component {
-  /**constructor(props) {
-    super(props);
-    this.state = {
-      location: 'San Francisco',
-    };
-  }**/
   state = {
     location: '',
   };
@@ -50,7 +44,7 @@ export default class App extends React.Component {
               <Text style={[styles.smallText, styles.textStyle]}>
               Light Cloud
               </Text>
-              <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
+              <Text style={[styles.largeText, styles.textStyle]}>25°</Text>
               <SearchInput placeholder="Search any city"
                 onSubmit={this.handleUpdateLocation}/>
             </View>

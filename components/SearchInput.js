@@ -19,6 +19,7 @@ export default class SearchInput extends React.Component {
 
   state = {
     text: '',
+    text2: '',
   };
 
   handleChangeText = text => {
