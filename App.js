@@ -5,9 +5,14 @@ import { StyleSheet,
   Platform,
   TextInput,
   KeyboardAvoidingView,
-  ImageBackground } from 'react-native';
+  ImageBackground,
+  ActivityIndicator,
+  StatusBar } from 'react-native';
+
 import SearchInput from './components/SearchInput';
+
 import getImageForWeather from './utils/getImageForWeather';
+import { fetchLocationId, fetchWeather } from './utils/api';
 
 export default class App extends React.Component {
   constructor(props) {
