@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet,
+import {
+  StyleSheet,
   Text,
   View,
   Platform,
   KeyboardAvoidingView,
   ImageBackground,
   ActivityIndicator,
-  StatusBar } from 'react-native';
+  StatusBar
+} from 'react-native';
 
 import SearchInput from './components/SearchInput';
 
@@ -16,7 +18,7 @@ import { fetchLocationId, fetchWeather } from './utils/api';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       loading: false,
       error: false,
@@ -30,10 +32,30 @@ export default class App extends React.Component {
     this.handleUpdateLocation('San Francisco');
   }
 
-  handleUpdateLocation = city => {
-    this.setState({
-        location: city,
-      });
+  handleUpdateLocation = async (city) => {
+    if (!city) return;
+
+    this.setState({ loading: true }, async () => {
+      try {
+        const locationId = await fetchLocationId(city);
+        const { location, weather, temperature } = await fetchWeather(
+          locationId,
+        );
+
+        this.setState({
+          loading: false,
+          error: false,
+          location,
+          weather,
+          temperature,
+        });
+      } catch (e) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
+    });
   };
 
   render() {
@@ -42,25 +64,29 @@ export default class App extends React.Component {
     return (
       <KeyboardAvoidingView
         style={styles.container}
-        behavior="padding">
+        behavior="padding"
+      >
 
         <ImageBackground
           source={getImageForWeather('Light Cloud')}
           style={styles.imageContainer}
-          imageStyle={styles.image}>
+          imageStyle={styles.image}
+        >
 
           <View style={styles.detailsContainer}>
             <Text style={[styles.largeText, styles.textStyle]}>
               {location}
             </Text>
-              <Text style={[styles.smallText, styles.textStyle]}>
+            <Text style={[styles.smallText, styles.textStyle]}>
               Light Cloud
-              </Text>
-              <Text style={[styles.largeText, styles.textStyle]}>25°</Text>
-              <SearchInput placeholder="Search any city"
-                onSubmit={this.handleUpdateLocation}/>
-            </View>
-          </ImageBackground>
+            </Text>
+            <Text style={[styles.largeText, styles.textStyle]}>25°</Text>
+            <SearchInput
+              placeholder="Search any city"
+              onSubmit={this.handleUpdateLocation}
+            />
+          </View>
+        </ImageBackground>
       </KeyboardAvoidingView>
     );
   }
@@ -75,14 +101,14 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     textAlign: 'center',
-  ...Platform.select({
-    ios: {
-      fontFamily: 'AvenirNext-Regular',
-    },
-    android: {
-      fontFamily: 'Roboto',
-    },
-  }),
+    ...Platform.select({
+      ios: {
+        fontFamily: 'AvenirNext-Regular',
+      },
+      android: {
+        fontFamily: 'Roboto',
+      },
+    }),
     color: 'white',
   },
   largeText: {
@@ -111,10 +137,10 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   detailsContainer: {
-  flex: 1,
-  justifyContent: 'center',
-  backgroundColor: 'rgba(0,0,0,0.2)',
-  paddingHorizontal: 20,
-  alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    paddingHorizontal: 20,
+    alignItems: 'center',
   },
 });
